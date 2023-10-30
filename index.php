@@ -11,7 +11,7 @@
     
 </head>
 <body class="bg-fondo-yelow">
-    <div class="min-h-620 h-screen w-screen min-w-1350">
+    <div class="min-h-620 h-auto max-h-screen w-screen min-w-1350">
         <?php 
             include_once($_SERVER["DOCUMENT_ROOT"]."/src/controller/LoginControlador.php");
             include_once($_SERVER["DOCUMENT_ROOT"]."/src/controller/ClaseControlador.php");
@@ -40,7 +40,7 @@
                             }
                             if (isset($_GET['delete'])) {
                                 if ($_GET['delete'] == 'false') {
-                                    $userContrl->checkElimanar($_GET['idDelete'],$_SESSION['MODULO']); 
+                                    $userContrl->checkElimanar($_GET['idDelete'],$_SESSION['MODULO'],$_GET['pagina']); 
                                 }else if ($_GET['delete'] == 'true'){
                                     $userContrl->EliminarUser($_GET['idDelete']);
                                 }

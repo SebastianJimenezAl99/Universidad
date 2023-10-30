@@ -22,6 +22,9 @@ module.exports = {
       zIndex:{
         '1' : '1',
       },
+      maxHeight:{
+        '400' : '455px'
+      },
     },
   },
   plugins: [],

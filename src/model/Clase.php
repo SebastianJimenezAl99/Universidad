@@ -48,7 +48,7 @@ class Clase{
                     title: "Creacion exitosa",
                     text: "Se ha creado de manera exitosa",
                 }).then(function() {
-                    window.location.href = "/index.php"; 
+                    window.location.href = "/index.php?pagina=1"; 
                 });
             </script>
             ';
@@ -76,7 +76,7 @@ class Clase{
                         title: "Cambio exitoso",
                         text: "Se ha realizado los cambios de manera exitosa",
                     }).then(function() {
-                        window.location.href = "/index.php"; 
+                        window.location.href = "/index.php?pagina=1"; 
                     });
                 </script>
                 ';
@@ -123,7 +123,7 @@ class Clase{
                     title: "Eliminado con Exito",
                     text: "El registro se ha eliminado",
                 }).then(function() {
-                    window.location.href = "/index.php"; 
+                    window.location.href = "/index.php?pagina=1"; 
                 });
             </script>
             ';

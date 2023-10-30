@@ -107,9 +107,9 @@ class Usuario{
     }
 
     public function cambiarRol($data){
-        $id_rol = $data['id_rol'];
+        $id = $data['id'];
         $rol = ["Administrador","Maestro","Alumno"];
-        if ($id_rol == $_SESSION['USER']['id_rol']) {
+        if ($id == 2) {
             echo '
                 <script>
                     Swal.fire({
@@ -117,7 +117,7 @@ class Usuario{
                         title: "Acceso no permitido",
                         text: "Usted no puede realizar cambio de rol y estado de usted mismo",
                     }).then(function() {
-                        window.location.href = "/index.php"; 
+                        window.location.href = "/index.php?pagina=1"; 
                     });
                 </script>
                 ';
@@ -126,6 +126,7 @@ class Usuario{
                 $conexion = conectarBaseDeDatos();
                 $email = $data['email'];
                 $id = $data['id'];
+                $id_rol = ['id_rol'];
                 $estado = isset($data['estado']) ? "Activo" : "Inactivo";
                 $sql = "UPDATE usuarios SET id_rol = ? , estado = ? WHERE usuarioID = ? and email= ?;";
                 $stmt = $conexion->prepare($sql);
@@ -140,7 +141,7 @@ class Usuario{
                             title: "Cambio Exitoso",
                             text: "Se ha realizado el cambio de estado y/o rol",
                         }).then(function() {
-                            window.location.href = "/index.php"; 
+                            window.location.href = "/index.php?pagina=1"; 
                         });
                     </script>
                     ';
@@ -219,7 +220,7 @@ class Usuario{
                         title: "Creacion exitosa",
                         text: "Se ha creado de manera exitosa",
                     }).then(function() {
-                        window.location.href = "/index.php"; 
+                        window.location.href = "/index.php?pagina=1"; 
                     });
                 </script>
                 ';
@@ -267,7 +268,7 @@ class Usuario{
                         title: "Cambio exitoso",
                         text: "Se ha realizado los cambios de manera exitosa",
                     }).then(function() {
-                        window.location.href = "/index.php"; 
+                        window.location.href = "/index.php?pagina=1"; 
                     });
                 </script>
                 ';
@@ -282,7 +283,7 @@ class Usuario{
             $sql = "SELECT u.usuarioID as id_maestro, CONCAT(u.nombre,' ',u.apellido) as maestro
             FROM usuarios u
             LEFT JOIN clases c ON u.usuarioID = c.id_maestro
-            WHERE u.id_rol = 2 AND c.id_clase IS NULL;";
+            WHERE u.id_rol = 2 AND c.id_clase IS NULL AND u.estado = 'Activo';";
             $stmt = $conexion->prepare($sql);
             $stmt->execute();
             $resultado = $stmt->get_result();
@@ -314,7 +315,7 @@ class Usuario{
                     title: "Eliminado con Exito",
                     text: "El registro se ha eliminado",
                 }).then(function() {
-                    window.location.href = "/index.php"; 
+                    window.location.href = "/index.php?pagina=1"; 
                 });
             </script>
             ';

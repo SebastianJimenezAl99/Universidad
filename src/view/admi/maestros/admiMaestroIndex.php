@@ -1,10 +1,24 @@
 <?php 
     $filasAll = $_SESSION['AllUSERS'];
-    $filas = [];
+    $data = [];
     foreach ($filasAll as $fila) {
         if($fila['rol'] == 'Maestro' && $fila['estado'] == 'Activo'){
-            $filas[] = $fila;
+            $data[] = $fila;
         }
+    }
+    $menorLimit = 1;
+    $mayorLimit = 10;
+    $cantidad = count($data);
+    $grupo = ceil($cantidad/10);
+    $contador = 0;
+    for ($i=0; $i < $grupo ; $i++) { 
+        for ($j=0; $j < 10; $j++) { 
+            $filas[$i][$contador] =  $data[$contador];
+            $contador++;
+            if ($contador == $cantidad) {
+                break;
+            }
+        }    
     }
 
     //unset($_SESSION['AllUSERS']);
@@ -14,50 +28,58 @@
     
 ?>
 <div>
-    <h1>Lista de Maestros</h1>
-    <div>
-        <div>
-            <h2>Informacion de maestros</h2>
-            <a href="/index.php?modulo=adminMaestros&create">Agregar Maestro</a>
+    <h1 class="mb-2 text-xl">Lista de Maestros</h1>
+    <div class="bg-white border-solid border border-gray-400 rounded">
+        <div class="p-3 flex justify-between border-b border-gray-400 border-solid items-center">
+            <h2 class="text-lg font-semibold">Información de Maestros</h2>
+            <a class="bg-blue-600 p-2 text-xs text-white font-bold rounded" href="/index.php?modulo=adminMaestros&pagina=<?php echo $_GET['pagina'] ?>&create">Agregar Maestro</a>
         </div>
         
-        <div>
-            <table>
-                <thead >
+        <div class="p-3 overflow-x-auto max-h-400 overflow-y-auto">
+            <table class="w-full text-xs">
+                <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Direccion</th>
-                        <th>Fecha de Nacimiento</th>
-                        <th>Clases Asinadas</th>
-                        <th>Acciones</th>
+                        <th class="p-2 border-y-2">#</th>
+                        <th class="p-2 border-y-2">Nombre</th>
+                        <th class="p-2 border-y-2">Dirección</th>
+                        <th class="p-2 border-y-2">Fecha de Nacimiento</th>
+                        <th class="p-2 border-y-2">Clases Asignadas</th>
+                        <th class="p-2 border-y-2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
-                
-                    foreach ($filas as $i => $fila) {
-                ?>
-                    <tr>
-                        <td><?php echo $i+1; ?></td>
-                        <td><?php echo $fila['nombre']." ".$fila['apellido'] ; ?></td>
-                        <td><?php echo $fila['direccion']; ?></td>
-                        <td><?php echo $fila['fechaNacimiento'] ; ?></td>
-                        <td><?php echo $fila['clase'] ? $fila['clase']: '<span class="bg-yellow-500 rounded-md p-0.5 font-bold text-xs">Sin asignación</span>' ; ?></td>
-                        <td class="text-center">
-                            <a href="index.php?modulo=adminMaestros&idUseSelect=<?php echo $fila['usuarioID'];?>"><i class="fa-solid fa-pen-to-square" style="color: #4391A2;"></i></a>
-                            <?php echo $fila['clase'] ? "" : '<a href="index.php?modulo=adminMaestros&idDelete='.$fila['usuarioID'].'&delete=false"><i class="fa-solid fa-trash" style="color: #ef0101;"></i></a>' ; ?>
+                    <?php 
+                    $alternarColor = true;
+                    foreach ($filas[$_GET['pagina']-1] as $i => $fila) {
+                        $alternarColor = !$alternarColor;
+                        $filaClase = $alternarColor ? 'bg-white' : 'bg-gray-300';
+                    ?>
+                    <tr class="<?php echo $filaClase; ?>">
+                        <td class="p-2 border"><?php echo $i+1; ?></td>
+                        <td class="p-2 border"><?php echo $fila['nombre']." ".$fila['apellido'] ; ?></td>
+                        <td class="p-2 border"><?php echo $fila['direccion']; ?></td>
+                        <td class="p-2 border"><?php echo $fila['fechaNacimiento'] ; ?></td>
+                        <td class="border"><?php echo $fila['clase'] ? $fila['clase']: '<span class="bg-yellow-500 rounded-md p-0.5 font-bold text-xs">Sin asignación</span>' ; ?></td>
+                        <td class="p-2 border text-center">
+                            <a href="index.php?modulo=adminMaestros&pagina=<?php echo $_GET['pagina']; ?>&idUseSelect=<?php echo $fila['usuarioID'];?>"><i class="fa-solid fa-pen-to-square" style="color: #4391A2;"></i></a>
+                            <?php echo $fila['clase'] ? "" : '<a href="index.php?modulo=adminMaestros&pagina='.$_GET['pagina'].'&idDelete='.$fila['usuarioID'].'&delete=false"><i class="fa-solid fa-trash" style="color: #ef0101;"></i></a>' ; ?>
                         </td>
                     </tr>
-                <?php } ?>
+                    <?php } ?>
                 </tbody>
             </table>
-            <div>
-            <span>Mostrando de 1 a 10 de 36 registros</span>
+            
+            <div class="flex justify-between">
+                <span>Mostrando de 1 a 10 de <?php echo $cantidad;?> registros</span>
+                <div class="border border-gray-400 rounded text-sm p-1 w-28 flex justify-between">
+                    <a class="border-r border-gray-400 pr-2 <?php echo $_GET['pagina'] > 1 ? 'text-blue-600' : 'pointer-events-none text-gray-400"' ?>" <?php echo $_GET['pagina'] > 1 ? 'href="index.php?modulo='.$_SESSION['MODULO'].'&pagina='.($_GET['pagina']-1).'"' : 'href="#" class="pointer-events-none text-gray-400"' ?> >Atrás</a>
+                    <a  <?php echo $_GET['pagina'] < $grupo ? 'href="index.php?modulo='.$_SESSION['MODULO'].'&pagina='.($_GET['pagina']+1).'"class="text-blue-600"' : 'href="#" class="pointer-events-none text-gray-400"' ?> >Siguiente</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <script>
@@ -70,18 +92,18 @@
 
             botonClose.addEventListener('click', () => {
                 modalContainer.classList.add('hidden');
-                window.location.href = 'index.php'; 
+                window.location.href = 'index.php?pagina=<?php echo $_GET['pagina']; ?>'; 
             });
 
             closeModalButton.addEventListener('click', () => {
                 modalContainer.classList.add('hidden');
-                window.location.href = 'index.php'; 
+                window.location.href = 'index.php?pagina=<?php echo $_GET['pagina']; ?>'; 
             });
 
             modalContainer.addEventListener('click', (event) => {
                 if (event.target === modalContainer) {
                     modalContainer.classList.add('hidden');
-                    window.location.href = 'index.php'; 
+                    window.location.href = 'index.php?pagina=<?php echo $_GET['pagina']; ?>'; 
                 }
             });
 

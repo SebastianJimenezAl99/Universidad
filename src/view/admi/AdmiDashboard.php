@@ -14,10 +14,10 @@
     <!-- Resto del menu disponible -->
     <div class=" text-white p-4 pt-5 flex flex-col">
       <h1 class="w-full text-center mb-3">MENU ADMINISTRACION</h1>
-      <a href="/index.php?modulo=adminPermisos" class="mb-3">Permisos</a>
-      <a href="/index.php?modulo=adminMaestros" class="mb-3">Maestros</a>
-      <a href="/index.php?modulo=adminAlumnos" class="mb-3">Alumnos</a>
-      <a href="/index.php?modulo=adminClases" class="mb-3">Clases</a>
+      <a href="/index.php?modulo=adminPermisos&pagina=1" class="mb-3">Permisos</a>
+      <a href="/index.php?modulo=adminMaestros&pagina=1" class="mb-3">Maestros</a>
+      <a href="/index.php?modulo=adminAlumnos&pagina=1" class="mb-3">Alumnos</a>
+      <a href="/index.php?modulo=adminClases&pagina=1" class="mb-3">Clases</a>
     </div>
   </div>
   <!-- div de contenido -->
@@ -30,7 +30,7 @@
       </div>
     </header>
     <!-- Contenedor principal interno -->
-    <div class="w-full h-full bg-gray-200 p-6">
+    <div class="w-full h-full bg-gray-200 p-2">
       <?php 
       switch ($_SESSION['MODULO']) {
         case 'dashboard':

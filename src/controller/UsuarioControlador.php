@@ -49,7 +49,7 @@ class UsuarioControlador{
         return $userModel->maestrosSinAsignacion();
     }
 
-    public function checkElimanar($id,$modulo){
+    public function checkElimanar($id,$modulo,$pagina){
         echo '
         <script>
         Swal.fire({
@@ -64,10 +64,10 @@ class UsuarioControlador{
             if (result.isConfirmed) {
           
               // Redirección si el usuario confirma
-              window.location.href = "/index.php?modulo='.$modulo.'&idDelete='.$id.'&delete=true";
+              window.location.href = "/index.php?modulo='.$modulo.'&pagina='.$pagina.'&idDelete='.$id.'&delete=true";
             } else {
               // Redirección si el usuario no confirma
-              window.location.href = "/index.php?modulo='.$modulo.'";
+              window.location.href = "/index.php?modulo='.$modulo.'&pagina='.$pagina.'";
             }
           });
           

@@ -39,10 +39,10 @@ class ClaseControlador{
             if (result.isConfirmed) {
           
               // Redirección si el usuario confirma
-              window.location.href = "/index.php?modulo=adminClases&idDelete='.$id.'&delectClase=true";
+              window.location.href = "/index.php?modulo=adminClases&pagina=1&idDelete='.$id.'&delectClase=true";
             } else {
               // Redirección si el usuario no confirma
-              window.location.href = "/index.php?modulo=adminClases";
+              window.location.href = "/index.php?modulo=adminClases&pagina=1";
             }
           });
           
