@@ -296,4 +296,32 @@ class Usuario{
         }
     }
 
+
+    public function EliminarUser($id) {
+        try {
+            $conexion = conectarBaseDeDatos();
+
+            $sql = "UPDATE usuarios SET estado = 'Inactivo' WHERE usuarioID = ?;";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bind_param('i',$id);
+            $stmt->execute();
+            $stmt->close();
+            $conexion->close();
+            echo '
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "Eliminado con Exito",
+                    text: "El registro se ha eliminado",
+                }).then(function() {
+                    window.location.href = "/index.php"; 
+                });
+            </script>
+            ';
+           
+        } catch (Exception $e) {
+            echo "Error en la base de datos: " . $e->getMessage();
+        }
+    }
+
 }

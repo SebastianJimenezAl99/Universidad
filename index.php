@@ -30,16 +30,28 @@
                 }else{ /* Aqui, si se ha iniciado seccion dependiendo del rol del usuario podra entra a la vista que le corresponde */
                     if ($_SESSION['USER']['id_rol'] == 1) { /* rol 1 => Admin */
                         if (isset($_SESSION['MODULO'])) { /* aqui verificamos si el admin a dado clic algunos de los modulos, si asi lo es guarda el nombre del modulo donde se usa en la vista del admin */
-                            if (isset($_GET['delectClase'])) {
-                                $claseContrl->eliminarClase($_GET['idUseSelect']);
+                            if (isset($_GET['delectClase']) ) {
+                                if ($_GET['delectClase'] == 'false') {
+                                    $claseContrl->CheckEliminarClase($_GET['idDelete']); 
+                                }else if ($_GET['delectClase'] == 'true'){
+                                    $claseContrl->eliminarClase($_GET['idDelete']);
+                                }
+                                
+                            }
+                            if (isset($_GET['delete'])) {
+                                if ($_GET['delete'] == 'false') {
+                                    $userContrl->checkElimanar($_GET['idDelete'],$_SESSION['MODULO']); 
+                                }else if ($_GET['delete'] == 'true'){
+                                    $userContrl->EliminarUser($_GET['idDelete']);
+                                }
                             }
                             
                             $_SESSION['MODULO'] = isset($_GET['modulo']) ? $_GET['modulo'] : $_SESSION['MODULO'] ;
-                            $_SESSION['AllUSERS'] = $loginContrl->ListAllUser(); /* Aqui vamos a guadadar la informacion de la lista todos los usuarios para el modulo de permisos del admin */
+                            $_SESSION['AllUSERS'] = $userContrl->ListAllUser(); /* Aqui vamos a guadadar la informacion de la lista todos los usuarios para el modulo de permisos del admin */
                             $_SESSION['LISTA_CLASES'] = $claseContrl->listarClases();
                             $_SESSION['MAESTROS_DISPONIBLE'] = $userContrl->maestrosSinAsignacion();
                             if (isset($_GET['idUseSelect'] )) {
-                                $_SESSION['USER_FOR_EDIT'] = $loginContrl->FindForId($_GET['idUseSelect']);
+                                $_SESSION['USER_FOR_EDIT'] = $userContrl->FindForId($_GET['idUseSelect']);
                                 $_SESSION['CLASS_FOR_EDIT'] = $claseContrl->findClassForId($_GET['idUseSelect']);
                             }
                         
@@ -61,23 +73,23 @@
                     $loginContrl->validarUserAndPasswordAll($_POST);
                 }
                 if(isset($_POST['btnSaveEditAdminPermiso'])){
-                    $loginContrl->cambiarRol($_POST);
+                    $userContrl->cambiarRol($_POST);
                 }
 
                 if(isset($_POST['btnCrearMestro'])){
-                    $loginContrl->crearUser($_POST);
+                    $userContrl->crearUser($_POST);
                 }
 
                 if (isset($_POST['btnEditMaestro'])) {
-                    $loginContrl->editUser($_POST);
+                    $userContrl->editUser($_POST);
                 }
 
                 if (isset($_POST['btnCrearAlumno'])) {
-                    $loginContrl->crearUser($_POST);
+                    $userContrl->crearUser($_POST);
                 }
 
                 if (isset($_POST['btnEditAlumno'])) {
-                    $loginContrl->editUser($_POST);
+                    $userContrl->editUser($_POST);
                 }
 
                 if (isset($_POST['btnCrearClase'])) {

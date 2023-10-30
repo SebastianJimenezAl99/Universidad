@@ -44,7 +44,10 @@
                         <td><?php echo $fila['direccion']; ?></td>
                         <td><?php echo $fila['fechaNacimiento'] ; ?></td>
                         <td><?php echo $fila['clase'] ? $fila['clase']: '<span class="bg-yellow-500 rounded-md p-0.5 font-bold text-xs">Sin asignación</span>' ; ?></td>
-                        <td class="text-center"><a href="index.php?modulo=adminMaestros&idUseSelect=<?php echo $fila['usuarioID'];?>"><i class="fa-solid fa-pen-to-square" style="color: #4391A2;"></i></a></td>
+                        <td class="text-center">
+                            <a href="index.php?modulo=adminMaestros&idUseSelect=<?php echo $fila['usuarioID'];?>"><i class="fa-solid fa-pen-to-square" style="color: #4391A2;"></i></a>
+                            <?php echo $fila['clase'] ? "" : '<a href="index.php?modulo=adminMaestros&idDelete='.$fila['usuarioID'].'&delete=false"><i class="fa-solid fa-trash" style="color: #ef0101;"></i></a>' ; ?>
+                        </td>
                     </tr>
                 <?php } ?>
                 </tbody>

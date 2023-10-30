@@ -46,7 +46,14 @@
                         <td><?php echo $fila['email']; ?></td>
                         <td><?php echo $fila['direccion']; ?></td>
                         <td><?php echo $fila['fechaNacimiento'] ; ?></td>
-                        <td class="text-center"><a href="index.php?modulo=adminAlumnos&idUseSelect=<?php echo $fila['usuarioID'];?>"><i class="fa-solid fa-pen-to-square" style="color: #4391A2;"></i></a></td>
+                        <td class="text-center">
+                            <a href="index.php?modulo=adminAlumnos&idUseSelect=<?php echo $fila['usuarioID'];?>">
+                                <i class="fa-solid fa-pen-to-square" style="color: #4391A2;"></i>
+                            </a>
+                            <a href="index.php?modulo=adminAlumnos&idDelete=<?php echo $fila['usuarioID'];?>&delete=false">
+                                <i class="fa-solid fa-trash" style="color: #ef0101;"></i>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
                 </tbody>

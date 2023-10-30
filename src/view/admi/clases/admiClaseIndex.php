@@ -36,7 +36,7 @@
                         <td><?php echo $fila['alumnosInscritos']== 0 ? '<span class="bg-yellow-500 rounded-md p-0.5 font-bold text-xs">Sin alumnos</span>': $fila['alumnosInscritos'] ; ?></td>
                         <td class="text-center">
                             <a href="index.php?modulo=adminClases&idUseSelect=<?php echo $fila['id_clase'];?>"><i class="fa-solid fa-pen-to-square" style="color: #4391A2;"></i></a>
-                            <a href="index.php?modulo=adminClases&delectClase&idUseSelect=<?php echo $fila['id_clase'];?>"><i class="fa-solid fa-trash" style="color: #ef0101;"></i></a>
+                            <a href="index.php?modulo=adminClases&idDelete=<?php echo $fila['id_clase'];?>&delectClase=false"><i class="fa-solid fa-trash" style="color: #ef0101;"></i></a>
                         </td>
                     </tr>
                 <?php } ?>
