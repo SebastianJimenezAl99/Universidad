@@ -115,6 +115,13 @@ class Clase{
             $stmt->bind_param("i",$id);
             $stmt->execute();
             $stmt->close();
+            
+            $sql = "DELETE FROM estudiantes_clases WHERE id_clase = ?;";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $stmt->close();
+
             $conexion->close();
             echo '
             <script>
