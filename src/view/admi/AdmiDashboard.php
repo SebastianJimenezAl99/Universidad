@@ -14,10 +14,10 @@
     <!-- Resto del menu disponible -->
     <div class=" text-white p-4 pt-5 flex flex-col">
       <h1 class="w-full text-center mb-3">MENU ADMINISTRACION</h1>
-      <a href="/index.php?modulo=adminPermisos&pagina=1" class="mb-3">Permisos</a>
-      <a href="/index.php?modulo=adminMaestros&pagina=1" class="mb-3">Maestros</a>
-      <a href="/index.php?modulo=adminAlumnos&pagina=1" class="mb-3">Alumnos</a>
-      <a href="/index.php?modulo=adminClases&pagina=1" class="mb-3">Clases</a>
+      <a href="/index.php?modulo=adminPermisos&pagina=1" class="mb-3"><i class="fa-solid fa-user-gear mr-1"></i>Permisos</a>
+      <a href="/index.php?modulo=adminMaestros&pagina=1" class="mb-3"><i class="fa-solid fa-chalkboard-user mr-1"></i>Maestros</a>
+      <a href="/index.php?modulo=adminAlumnos&pagina=1" class="mb-3"><i class="fa-solid fa-graduation-cap mr-1"></i>Alumnos</a>
+      <a href="/index.php?modulo=adminClases&pagina=1" class="mb-3"><i class="fa-solid fa-chalkboard mr-1"></i>Clases</a>
     </div>
   </div>
   <!-- div de contenido -->
