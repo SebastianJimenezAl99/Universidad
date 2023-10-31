@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2023 a las 17:04:29
+-- Tiempo de generación: 31-10-2023 a las 17:32:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -55,16 +55,16 @@ CREATE TABLE `clases` (
 INSERT INTO `clases` (`id_clase`, `nombre`, `id_maestro`) VALUES
 (1, 'Calculo Integral', 0),
 (2, 'Programación I', 7),
-(3, 'Algebra Lineal', NULL),
-(5, 'Calculo Diferencial', 8),
+(3, 'Algebra Lineal', 4),
+(4, 'Calculo Diferencial', 8),
+(5, 'Prueba 2', 0),
 (6, 'Lengua Inglesa', NULL),
 (7, 'Ética Empresarial', NULL),
 (8, 'Robótica I', 5),
+(9, 'Física Mecánica', 0),
 (10, 'Prueba', NULL),
 (11, 'Quimica', 0),
-(12, 'Física Eléctrica', 0),
-(13, 'Física Mecánica', 0),
-(14, 'Prueba 2', 0);
+(12, 'Física Eléctrica', 0);
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,37 @@ CREATE TABLE `estudiantes_clases` (
 --
 
 INSERT INTO `estudiantes_clases` (`id_clase`, `id_estudiante`) VALUES
-(1, 1);
+(1, 1),
+(1, 40),
+(1, 41),
+(1, 42),
+(1, 43),
+(1, 44),
+(1, 45),
+(1, 46),
+(1, 47),
+(1, 48),
+(1, 49),
+(2, 40),
+(2, 41),
+(2, 42),
+(2, 43),
+(2, 44),
+(2, 45),
+(2, 46),
+(2, 47),
+(2, 48),
+(2, 49),
+(3, 40),
+(3, 41),
+(3, 42),
+(3, 43),
+(3, 44),
+(3, 45),
+(3, 46),
+(3, 47),
+(3, 48),
+(3, 49);
 
 -- --------------------------------------------------------
 

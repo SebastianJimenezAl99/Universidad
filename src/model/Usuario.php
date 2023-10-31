@@ -21,24 +21,38 @@ class Usuario{
     
             if ($resultado->num_rows > 0) {
                 $fila = $resultado->fetch_assoc();
-    
-                if (password_verify($password,$fila['password'])) {
+                if($fila['estado'] == 'Activo'){
+                    if (password_verify($password,$fila['password'])) {
                     
-                    $_SESSION["USER"] = $fila;
-                    header("refresh:2;url=/index.php");
+                        $_SESSION["USER"] = $fila;
+                        header("refresh:2;url=/index.php"); 
+                    }else{
+                         echo '
+                        <script>
+                            Swal.fire({
+                                icon: "error",
+                                title: "Contraseña Invalida",
+                                text: "La contraseña ingresada es incorrecta",
+                            }).then(function() {
+                                window.location.href = "/index.php"; 
+                            });
+                        </script>
+                    '; 
+                    }
                 }else{
                     echo '
-                    <script>
-                        Swal.fire({
-                            icon: "error",
-                            title: "Contraseña Invalida",
-                            text: "La contraseña ingresada es incorrecta",
-                        }).then(function() {
-                            window.location.href = "/index.php"; 
-                        });
-                    </script>
-                ';
+                        <script>
+                            Swal.fire({
+                                icon: "info",
+                                title: "Usuario Inactivo",
+                                text: "El usuario se encuentra inactivo, por favor, comuníquese con administración.",
+                            }).then(function() {
+                                window.location.href = "/index.php"; 
+                            });
+                        </script>
+                    '; 
                 }
+                
             }  else {
                 echo '
                 <script>
@@ -50,7 +64,7 @@ class Usuario{
                         window.location.href = "/index.php"; 
                     });
                 </script>
-            ';
+            '; 
             } 
         } catch (Exception $e) {
             echo "Error en la base de datos: " . $e->getMessage();
