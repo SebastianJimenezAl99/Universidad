@@ -78,7 +78,14 @@
             </table>
 
             <div class="flex justify-between mt-4">
-                <span>Mostrando de 1 a 10 de <?php echo $cantidad;?> registros</span>
+                <?php
+                    $registrosPagina = 10;
+                    $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+                    $totalRegistros = $cantidad;
+                    $inicio = (($paginaActual-1) * $registrosPagina)+1;
+                    $fin = min(($inicio-1) + $registrosPagina, $totalRegistros);
+                ?>
+                <span>Mostrando de <?= $inicio ?> a <?= $fin ?> de <?php echo $cantidad;?> registros</span>
                 <div class="border border-gray-400 rounded text-sm p-1 w-28 flex justify-between">
                     <a class="border-r border-gray-400 pr-2 <?php echo $_GET['pagina'] > 1 ? 'text-blue-600' : 'pointer-events-none text-gray-400"' ?>" <?php echo $_GET['pagina'] > 1 ? 'href="index.php?modulo=adminPermisos&pagina='.($_GET['pagina']-1).'"' : 'href="#" class="pointer-events-none text-gray-400"' ?> >Atrás</a>
                     <a  <?php echo $_GET['pagina'] < $grupo ? 'href="index.php?modulo=adminPermisos&pagina='.($_GET['pagina']+1).'"class="text-blue-600"' : 'href="#" class="pointer-events-none text-gray-400"' ?> >Siguiente</a>

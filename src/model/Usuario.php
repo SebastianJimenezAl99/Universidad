@@ -307,6 +307,13 @@ class Usuario{
             $stmt->bind_param('i',$id);
             $stmt->execute();
             $stmt->close();
+
+            $sql1 = 'UPDATE clases SET id_maestro = NULL WHERE id_maestro = ?;';
+            $stmt1 = $conexion->prepare($sql1);
+            $stmt1->bind_param('i',$id);
+            $stmt1->execute();
+            $stmt1->close();
+
             $conexion->close();
             echo '
             <script>
